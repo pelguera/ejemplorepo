@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../templates/uiConMenu.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			
+			<p:messages id="msgs"/>  
+				       
+			<h:panelGrid columns="2" styleClass="alineacionColumna" >
+				<f:facet name="header">  
+			        EDICION DE PRODUCTOS
+			    </f:facet>
+				<h:outputText value="NOMBRE" />
+				<p:keyboard value="#{mantenimientoProducto.producto.nombre}" layout="alphabetic"/>
+
+				<h:outputText value="MARCA" />
+				<p:keyboard value="#{mantenimientoProducto.producto.marca}" layout="qwertyBasic"/>
+
+				<h:outputText value="PRECIO" />				
+				<p:keyboard value="#{mantenimientoProducto.producto.precio}" />
+				
+				<h:outputText value="STOCK" />				
+				<p:keyboard value="#{mantenimientoProducto.producto.stock}" keypadOnly="true"/>
+				
+				<h:outputText value="CATEGORIA" /> 
+			  	<p:selectOneMenu  value="#{mantenimientoProducto.producto.categoria.idcategoria}">  
+	                <f:selectItem itemLabel="Seleccione Categoria" itemValue="" />  
+	                <f:selectItems value="#{mantenimientoProducto.categorias}" var ="x" 
+	                			itemValue="#{x.idcategoria}" itemLabel="#{x.descripcion}"  />  
+	            </p:selectOneMenu>  
+           
+				<br/>
+				<br/>
+				<h:outputText id="msje" value="#{mantenimientoProducto.msjeRegistro}" />           
+           
+				<p:commandButton value="Grabar" ajax="false" action="#{mantenimientoProducto.modificarProducto}" />
+				<p:commandButton value="Cancelar" ajax="false" action="#{mantenimientoProducto.irBandejaProductos}" />
+				
+				<h:inputHidden value="#{mantenimientoProducto.producto.idproducto}" id="hdIdProducto" />
+			</h:panelGrid>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../templates/uiConMenu.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+						       
+			<h:panelGrid columns="3" styleClass="alineacionColumna" >
+				<f:facet name="header">  
+			        REGISTRO DE PRODUCTOS
+			    </f:facet>
+				<h:outputText value="NOMBRE" />
+				<p:inputText id="txtNomProducto" value="#{mantenimientoProducto.producto.nombre}" required="true"
+							 requiredMessage="El nombre es requerido" validatorMessage="Máximo 20 caracteres">
+					<f:validateLength maximum="20" />
+				</p:inputText>
+				<h:message for="txtNomProducto"></h:message>
+				
+				<h:outputText value="MARCA" />
+				<p:inputText id="txtMarcaProducto" value="#{mantenimientoProducto.producto.marca}" required="true"
+							 requiredMessage="La marca es requerida" validatorMessage="Máximo 30 caracteres">
+					<f:validateLength maximum="30" />
+				</p:inputText>
+				<h:message for="txtMarcaProducto"></h:message>
+				
+				<h:outputText value="PRECIO" />
+				<p:inputText id="txtPrecProducto" value="#{mantenimientoProducto.producto.precio}" required="true"
+							 converter="#{Double}" requiredMessage="El precio es requerido" validatorMessage="El precio máximo es 5000">
+					<f:validateDoubleRange minimum="0" maximum="5000"/>
+				</p:inputText>
+				<h:message for="txtPrecProducto"></h:message>
+				
+				<h:outputText value="STOCK" />
+				<p:inputMask id="txtStockProducto" value="#{mantenimientoProducto.producto.stock}" mask="999">				
+				</p:inputMask> 
+				<h:message for="txtStockProducto"></h:message>
+				
+				<h:outputText value="Email" />
+				<p:inputText id="txtWeb" value="#{mantenimientoProducto.txtWeb}" validator="#{mantenimientoProducto.validaMail}" />				
+				<h:message for="txtWeb"></h:message>				
+				
+				<h:outputText value="CATEGORIA" /> 
+			  	<p:selectOneMenu  value="#{mantenimientoProducto.producto.categoria.idcategoria}">  
+	                <f:selectItem itemLabel="Seleccione Categoria" itemValue="" />  
+	                <f:selectItems value="#{mantenimientoProducto.categorias}" var ="x" 
+	                			itemValue="#{x.idcategoria}" itemLabel="#{x.descripcion}"  />  
+	            </p:selectOneMenu>  
+           
+				<br/>
+				<br/>
+				<h:outputText id="msje" value="#{mantenimientoProducto.msjeRegistro}" />           
+           
+				<p:commandButton value="Grabar" ajax="false" action="#{mantenimientoProducto.insertaProducto}" />
+				<p:commandButton value="Cancelar" ajax="false" action="#{mantenimientoProducto.irBandejaProductos}" />
+						
+			</h:panelGrid>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

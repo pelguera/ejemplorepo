@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="../templates/uiConMenu.xhtml">
+	<ui:define name="content">
+
+	
+		<h:form>
+					     
+				<h:panelGrid id="pnlCategoria" columns="3" styleClass="alineacionColumna" >
+					
+					<h:outputText value="DESCRIPCION" />
+					<p:inputText id="txtDescCategoria" value="#{mantenimientoCategoria.categoria.descripcion}" required="true"/>
+					<p:message id="msgTxtDescCategoria" for="txtDescCategoria" />
+				  
+					<p:commandButton value="Enviar" ajax="false" action="#{mantenimientoCategoria.registro}" />					
+							
+				</h:panelGrid>
+				
+				<h:outputText id="msje" value="#{mantenimientoCategoria.msje}" />
+				
+				<br />
+				
+		    <p:dataTable var="cat" value="#{mantenimientoCategoria.listaCategoria}">  
+		        <p:column headerText="ID">  
+		            <h:outputText value="#{cat.idcategoria}" />  
+		        </p:column>  
+		  
+		        <p:column headerText="Descripcion">  
+		            <h:outputText value="#{cat.descripcion}" />  
+		        </p:column>  
+		 
+		    </p:dataTable>
+		    				
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+
